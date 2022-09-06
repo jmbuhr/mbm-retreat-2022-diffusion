@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Qwigley&display=swap');
+
+.subtitle {
+  font-style: italic
+}
+
+blockquote {
+  font-family: qwigley;
+  font-size: 4rem;
+}
+
+
+.otters > p > img {
+  margin: 0;
+}
+
+
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #cccedd;
+  border-radius: 25px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #1E4287;
+  border-radius: 25px;
+  border: 1px;
+}

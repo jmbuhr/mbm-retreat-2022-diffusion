@@ -1,0 +1,72 @@
+---
+title: Stable Diffusion
+subtitle: A talk about Art, Machine Learning and Otters
+date: MBM Retreat 2022
+# institute: MBM Retreat 2022
+author: Jannik Buhr
+bibliography: references.bib  
+format:
+  hits-revealjs:
+    css: ./styles.css
+    title-slide-attributes:
+        data-background-image: './img/An_otter_scientist_dressed_in_victorian_style_clothing_drinking_a_cup_of_coffee._The_otter_scientist_is_wearing_a_top_hat./seed_298317_00007.png'
+        data-background-size: 20%
+        data-background-position: bottom 50% left 5%
+  hits-html: default
+footer: '[jmbuhr.de](https://jmbuhr.de)'
+---
+
+#
+
+> "Jannik, we need to talk about the otters."
+
+## We need to talk about the otters {.scrollable .otters}
+
+```{python} 
+#| echo: false
+#| output: asis
+import glob
+def get_prompt(s):
+  x = s.split('/')[-2].replace('_', ' ')
+  return x
+path = './img/'
+files = glob.glob(path +'**/*.png', recursive=True)
+for f in files:
+  print(f"![]({f}){{width=10%}}")
+```
+
+## Try it for yourself!
+
+<https://github.com/basujindal/stable-diffusion>, a fork of <https://github.com/CompVis/stable-diffusion> [@rombach2021highresolution]
+
+```bash
+git clone git@github.com:basujindal/stable-diffusion.git
+cd stable-diffusion
+conda env create -f environment.yaml
+conda activate ldm
+mkdir -p models/ldm/stable-diffusion-v1/
+```
+
+Download the trained model weights: <https://huggingface.co/CompVis/stable-diffusion-v-1-4-original>
+
+```bash
+ln -s <path/to/model.ckpt> models/ldm/stable-diffusion-v1/model.ckpt 
+```
+
+And go!
+
+```bash
+python optimizedSD/optimized_txt2img.py\
+  --prompt 'The otter scientist makes a greate discovery in his steampunk chemistry laboratory'\
+  --turbo --H 512 --W 512 --n_iter 2 --n_samples 5 --ddim_steps 150
+```
+
+# Thank you
+
+{{< qrcode https://github.com/jmbuhr/mbm-retreat-2022-diffusion >}}
+
+## References
+
+:::{#refs}
+:::
+
