@@ -4,9 +4,23 @@
   font-style: italic
 }
 
-blockquote {
+.ottertalk h1 {
   font-family: qwigley;
   font-size: 4rem;
+}
+
+#q1 {
+  right: 0;
+  bottom: 0;
+}
+
+.smaller {
+  font-size: 1rem;
+}
+
+.wider {
+  margin-right: -5%;
+  /* margin-left: -5%; */
 }
 
 

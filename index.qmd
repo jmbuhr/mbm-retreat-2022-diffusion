@@ -16,9 +16,7 @@ format:
 footer: '[jmbuhr.de](https://jmbuhr.de)'
 ---
 
-#
-
-> "Jannik, we need to talk about the otters."
+# "Jannik, we need to talk about the otters." {.ottertalk}
 
 ## We need to talk about the otters {.scrollable .otters}
 
@@ -29,11 +27,28 @@ import glob
 def get_prompt(s):
   x = s.split('/')[-2].replace('_', ' ')
   return x
-path = './img/'
+path = './img/otters/'
 files = glob.glob(path +'**/*.png', recursive=True)
 for f in files:
   print(f"![]({f}){{width=10%}}")
 ```
+
+## How does it work? {auto-animate=true}
+
+@rombach2021highresolution
+
+:::footer
+Rombach, Robin, Andreas Blattmann, Dominik Lorenz, Patrick Esser, and Björn Ommer. 2021.
+"High-Resolution Image Synthesis with Latent Diffusion Models",
+:::
+
+## How does it work? {auto-animate=true}
+
+- IWR Heidelberg and LMU Munich
+
+## Network architecture
+
+![](img/2022-09-08-10-56-21.png)
 
 ## Try it for yourself!
 
@@ -61,9 +76,29 @@ python optimizedSD/optimized_txt2img.py\
   --turbo --H 512 --W 512 --n_iter 2 --n_samples 5 --ddim_steps 150
 ```
 
-# Thank you
+# Outlook
 
-{{< qrcode https://github.com/jmbuhr/mbm-retreat-2022-diffusion >}}
+## Implications
+
+## Thank you! {#thank-you}
+
+:::: {layout='[2,1.2]' .wider}
+:::l
+### MBM Group
+![](./img/mbm-group.JPG){#mbm-group}
+
+<!-- [<https://mbm.h-its.org/>]{.smaller} -->
+:::
+
+:::{#r}
+### Slides
+[<https://github.com/jmbuhr/mbm-retreat-2022-diffusion>]{.smaller}
+
+{{< qrcode https://github.com/jmbuhr/mbm-retreat-2022-diffusion q1 >}}
+:::
+::::
+
+# References
 
 ## References
 
