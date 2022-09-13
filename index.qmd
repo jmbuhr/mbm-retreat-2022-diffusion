@@ -30,33 +30,34 @@ def get_prompt(s):
 path = './img/otters/'
 files = glob.glob(path +'**/*.png', recursive=True)
 for f in files:
-  print(f"![]({f}){{width=10%}}")
+  print(f"![]({f}){{width=15%}}")
 ```
 
-## How does it work?
+## What is this magic?
 
+::: {layout='[-1,6,-1]'}
+![](img/2022-09-13-11-51-05.png)
 @rombach2021highresolution
+:::
+
+- uses significantly fewer resources than e.g. DALLE-2
+- A diffusion model (DM), but in latent space
+- source code and model weights are available
+
 
 :::footer
 Rombach, Robin, Andreas Blattmann, Dominik Lorenz, Patrick Esser, and Björn Ommer. 2021.
 "High-Resolution Image Synthesis with Latent Diffusion Models",
 :::
 
-## How does it work?
-
-- IWR Heidelberg and LMU Munich
-
-## How does it work
-
-![](./img/live-diffusion.webm)
-
-## Network architecture
-
-![](img/2022-09-08-10-56-21.png)
-
 ## Try it for yourself!
 
-<https://github.com/basujindal/stable-diffusion>, a fork of <https://github.com/CompVis/stable-diffusion> [@rombach2021highresolution]
+- Code is on GitHub!
+- original: [CompVis/stable-diffusion](https://github.com/CompVis/stable-diffusion)
+- fork for lower memory usage: [basujindal/stable-diffusion](https://github.com/basujindal/stable-diffusion)
+
+<details>
+<summary>code</summary>
 
 ```bash
 git clone git@github.com:basujindal/stable-diffusion.git
@@ -80,13 +81,50 @@ python optimizedSD/optimized_txt2img.py\
   --turbo --H 512 --W 512 --n_iter 2 --n_samples 5 --ddim_steps 150
 ```
 
-Fork with a webserver interface:
+</details>
 
-<https://github.com/lstein/stable-diffusion>
+- Fork with a webserver interface:
+[lstein/stable-diffusion](https://github.com/lstein/stable-diffusion)
 
-# Outlook
+## How does it work? -- Diffusion Models
 
-## Implications
+![@hoDenoisingDiffusionProbabilistic2020](img/2022-09-13-15-07-02.png)
+
+Problem:
+
+- operate directly in pixel space
+- need large GPU resources
+
+:::footer
+Ho, Jonathan, Ajay Jain, and Pieter Abbeel. 2020. "Denoising Diffusion Probabilistic Models."
+:::
+
+:::notes
+A diffusion probabilistic model (which we will call a “diffusion model” for brevity) is a parameterized Markov chain trained using variational inference to produce samples matching the data after finite time. Transitions of this chain are learned to reverse a diffusion process, which is a Markov chain that gradually adds noise to the data in the opposite direction of sampling until signal is destroyed. When the diffusion consists of small amounts of Gaussian noise, it is sufficient to set the sampling chain transitions to conditional Gaussians too, allowing for a particularly simple neural network parameterization.
+:::
+
+## How does it work? -- Latent Diffusion
+
+![@rombach2021highresolution](img/2022-09-08-10-56-21.png)
+
+- diffusion in the latent space of pretrained autoencoder
+- enables training with limited computational resources
+- cross attention layers for conditioning (e.g. on text input, bounding boxes)
+
+## How does it work?
+
+![](./img/live-diffusion.webm)
+
+# Outlook and Discussion
+
+- live demo while we discuss: <http://127.0.0.1:9090/>
+
+## Potential Questions
+
+- What are the implications for art and artists?
+- What about malicious use cases?
+- Who is responsible for the model output?
+- How about copyright and intellectual property?
 
 ## Thank you! {#thank-you}
 
@@ -95,7 +133,7 @@ Fork with a webserver interface:
 ### MBM Group
 ![](./img/mbm-group.JPG){#mbm-group}
 
-<!-- [<https://mbm.h-its.org/>]{.smaller} -->
+[<https://mbm.h-its.org/>]{.smaller}
 :::
 
 :::{#r}
